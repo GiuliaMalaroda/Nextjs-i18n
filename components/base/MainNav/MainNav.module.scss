@@ -1,0 +1,15 @@
+.MainNav {
+    
+    background-color: red;
+
+    &_List {
+        display: flex;
+        flex-direction: row;
+    }
+
+    &_Item {
+        &:not(:first-of-type) {
+            margin-left: 20px;
+        }
+    }
+}

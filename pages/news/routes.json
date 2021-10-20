@@ -1,0 +1,8 @@
+{
+    "/": ".",
+    "[slug]": {
+        "en": "news/:slug",
+        "it": "novita/:slug",
+        "de": "nachrichten/:slug"
+    }
+}
