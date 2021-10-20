@@ -1,0 +1,19 @@
+.LanguageMenu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #292928;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    padding: 10px 50px;
+    font-size: 12px;
+    line-height: 15px;
+    color: white;
+
+    // Label
+    &_Label {
+        margin-right: 20px;
+    }
+}
