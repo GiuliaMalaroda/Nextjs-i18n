@@ -1,7 +1,8 @@
 {
-    "/": {
-        "default": "news",
-        "it": "novita",
-        "de": "nachrichten"
+    "/": ".",
+    "[slug]": {
+        "en": "news/:slug",
+        "it": "novita/:slug",
+        "de": "nachrichten/:slug"
     }
 }

@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
-import Layout from "../../layout/Layout";
-import T from "../../components/hoc/T";
+import Layout from "../layout/Layout";
+import T from "../components/hoc/T";
 
 const News = () => {
     //const { posts, setPosts } = useState();

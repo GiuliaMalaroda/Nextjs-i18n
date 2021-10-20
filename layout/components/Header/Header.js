@@ -1,4 +1,4 @@
-import MainNav from '../../../components/compound/MainNav/MainNav';
+import MainNav from '../../../components/base/MainNav/MainNav';
 import css from './Header.module.scss';
 
 const Header = () => {
