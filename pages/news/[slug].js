@@ -6,7 +6,7 @@ const SingleNews = () => {
         axios.get("/posts").then(response => console.log(response.data));
     }, []);
     return (
-        <h1>Lorem</h1>
+        <h1>Lorem ipsum</h1>
     )
 }
 
