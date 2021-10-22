@@ -1,18 +1,8 @@
-import Layout from '../layout/Layout';
-import { useRouter } from 'next/router';
-import { Link } from 'next-translate-routes';
-import T from '../components/hoc/T';
+import I18n from '../components/hoc/I18n';
 
 const Homepage = () => {
-    const { locale } = useRouter();
-
     return (
-        <>
-            <Layout 
-                title="homepage"
-                description="Homepage description" >
-            </Layout>
-        </>
+        <h1>{I18n("pages","homepage")}</h1>
     )
 }
 
