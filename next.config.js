@@ -1,16 +1,14 @@
-const withTranslateRoutes = require('next-translate-routes/plugin');
+const routes = require('./lib/routes');
 const nextTranslate = require('next-translate');
 
-const nextConfig = withTranslateRoutes(
-    nextTranslate({
-        reactStrictMode: true
-    })
-);
+module.exports = nextTranslate({
+    reactStrictMode: true,
 
-const logRR = async () => {
-    console.log('From next.config.', { rewrites: await nextConfig.rewrites(), redirects: await nextConfig.redirects() })
-}
-  
-logRR();
+    async rewrites() {
+        return [...routes.rewrites]
+    },
 
-module.exports = nextConfig;
+    async redirects() {
+        return [...routes.redirects]
+    }
+});
