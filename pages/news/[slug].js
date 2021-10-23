@@ -1,6 +1,26 @@
 import { useRouter } from "next/router";
 import axios from "../../lib/axios";
 
+export async function getStaticProps({ params, locales }) {
+    const { data } = await axios.get('/posts');
+
+    let post;
+    for (let i = 0; i < locales.length; i++) {
+        let test = data.find(d => d.slug[locales[i]] === params.slug);
+
+        if (test) {
+            post = test;
+        }
+    }
+
+    return { 
+        props: { 
+            post 
+        },
+        revalidate: 200,
+    }
+}
+
 const SingleNews = ({ post }) => {
     const { locale } = useRouter();
 
@@ -33,19 +53,6 @@ export async function getStaticPaths({ locales }) {
     return { paths: paths, fallback: false }
 }
   
-export async function getStaticProps({ params, locales }) {
-    const { data } = await axios.get('/posts');
 
-    let post;
-    for (let i = 0; i < locales.length; i++) {
-        let test = data.find(d => d.slug[locales[i]] === params.slug);
-
-        if (test) {
-            post = test;
-        }
-    }
-
-    return { props: { post } }
-}
 
 export default SingleNews;
