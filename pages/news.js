@@ -3,6 +3,7 @@ import axios from "../lib/axios";
 import I18n from "../components/hoc/I18n";
 import LanguageNav from "../components/layout/LanguageNav";
 import I18nLink from '../components/hoc/I18nLink';
+import Link from 'next/link';
 
 const News = ({ data }) => {
     const { locale } = useRouter();
@@ -18,7 +19,7 @@ const News = ({ data }) => {
                 <article key={i}>
                     <h1>{article.title[locale]}</h1>
                     <p>{article.short_description[locale]}</p>
-                    <button>{article.slug[locale]}</button>
+                    <Link href={`/news/${article.slug[locale]}`} locale={locale}>{article.slug[locale]}</Link>
                 </article>
             )
         })}
