@@ -1,12 +1,15 @@
-import { useEffect } from "react";
+import { useRouter } from "next/router";
 import axios from "../../lib/axios";
 
-const SingleNews = () => {
-    useEffect(() => {
-        axios.get("/posts").then(response => console.log(response.data));
-    }, []);
+const SingleNews = ({ post }) => {
+    const { locale } = useRouter();
+
     return (
-        <h1>Lorem ipsum</h1>
+        <article>
+            {/* {name} */}
+            <h1>{post.title[locale]}</h1>
+            <p>{post.short_description[locale]}</p>
+        </article>
     )
 }
 
@@ -30,8 +33,19 @@ export async function getStaticPaths({ locales }) {
     return { paths: paths, fallback: false }
 }
   
-export async function getStaticProps({ params }) {
-    return { props: { name: "Giulia Malaroda" } }
+export async function getStaticProps({ params, locales }) {
+    const { data } = await axios.get('/posts');
+
+    let post;
+    for (let i = 0; i < locales.length; i++) {
+        let test = data.find(d => d.slug[locales[i]] === params.slug);
+
+        if (test) {
+            post = test;
+        }
+    }
+
+    return { props: { post } }
 }
 
 export default SingleNews;
