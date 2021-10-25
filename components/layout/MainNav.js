@@ -8,17 +8,17 @@ const MainNav = () => {
     return (
         <ul>
             <li>
-                <I18nLink href="/" locale={locale}>
+                <I18nLink href={{ pathname: "/" }} locale={locale}>
                     {I18n("pages","homepage")}
                 </I18nLink>
             </li>
             <li>
-                <I18nLink href="/about-us" locale={locale}>
+                <I18nLink href={{ pathname: "/about-us" }} locale={locale}>
                     {I18n("pages","about_us")}
                 </I18nLink>
             </li>
             <li>
-                <I18nLink href="/news" locale={locale}>
+                <I18nLink href={{ pathname: "/news" }} locale={locale}>
                     {I18n("pages","news")}
                 </I18nLink>
             </li>

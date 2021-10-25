@@ -1,37 +1,7 @@
 import { useRouter } from "next/router";
 import axios from "../../lib/axios";
-
-export async function getStaticProps({ params, locales }) {
-    const { data } = await axios.get('/posts');
-
-    let post;
-    for (let i = 0; i < locales.length; i++) {
-        let test = data.find(d => d.slug[locales[i]] === params.slug);
-
-        if (test) {
-            post = test;
-        }
-    }
-
-    return { 
-        props: { 
-            post 
-        },
-        revalidate: 200,
-    }
-}
-
-const SingleNews = ({ post }) => {
-    const { locale } = useRouter();
-
-    return (
-        <article>
-            {/* {name} */}
-            <h1>{post.title[locale]}</h1>
-            <p>{post.short_description[locale]}</p>
-        </article>
-    )
-}
+import LanguageNav from "../../components/layout/LanguageNav";
+import MainNav from '../../components/layout/MainNav';
 
 export async function getStaticPaths({ locales }) {
     const { data } = await axios.get("/posts");
@@ -52,7 +22,45 @@ export async function getStaticPaths({ locales }) {
 
     return { paths: paths, fallback: false }
 }
-  
 
+export async function getStaticProps({ params, locales }) {
+    const { data } = await axios.get('/posts');
+
+    let post;
+    let slugs;
+    for (let i = 0; i < locales.length; i++) {
+        let thisPost = data.find(d => d.slug[locales[i]] === params.slug);
+        
+        if (thisPost) {
+            post = thisPost;
+            slugs = thisPost.slug;
+        }
+    }
+
+    return { 
+        props: { 
+            post,
+            slugs 
+        }
+    }
+}
+
+const SingleNews = ({ post, slugs }) => {
+    const { locale } = useRouter();
+
+    return (
+        <>
+        <LanguageNav slugs={slugs} />
+        <hr />
+        <MainNav />
+        <hr />
+        <article>
+            {/* {name} */}
+            <h1>{post.title[locale]}</h1>
+            <p>{post.short_description[locale]}</p>
+        </article>
+        </>
+    )
+}
 
 export default SingleNews;
