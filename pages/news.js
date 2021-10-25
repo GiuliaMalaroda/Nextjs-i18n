@@ -7,6 +7,7 @@ import MainNav from '../components/layout/MainNav';
 
 const News = ({ data }) => {
     const { locale } = useRouter();
+    console.log(data);
 
     return (
         <>
@@ -38,7 +39,7 @@ const News = ({ data }) => {
     )
 }
 
-export async function getStaticProps(context) {
+export async function getServerSideProps(context) {
     const { data } = await axios.get('/posts');
   
     if (!data) {
