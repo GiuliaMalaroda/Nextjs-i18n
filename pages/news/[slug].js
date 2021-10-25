@@ -41,7 +41,8 @@ export async function getStaticProps({ params, locales }) {
         props: { 
             post,
             slugs 
-        }
+        },
+        revalidate: 10,
     }
 }
 
