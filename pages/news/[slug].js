@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import axios from "../../lib/axios";
 import LanguageNav from "../../components/layout/LanguageNav";
 import MainNav from '../../components/layout/MainNav';
+import CustomHead from "../../components/layout/CustomHead";
 
 export async function getStaticPaths({ locales }) {
     const { data } = await axios.get("/posts");
@@ -51,6 +52,7 @@ const SingleNews = ({ post, slugs }) => {
 
     return (
         <>
+        <CustomHead title={post.title[locale]} description={post.short_description[locale]} />
         <LanguageNav slugs={slugs} />
         <hr />
         <MainNav />
