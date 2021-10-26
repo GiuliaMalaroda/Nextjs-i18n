@@ -20,7 +20,7 @@ export async function getStaticPaths({ locales }) {
         }
     }
 
-    return { paths: paths, fallback: "blocking" }
+    return { paths: paths, fallback: true }
 }
 
 export async function getStaticProps({ params, locales }) {
