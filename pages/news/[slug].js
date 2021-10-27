@@ -4,7 +4,11 @@ import LanguageNav from "../../components/layout/LanguageNav";
 import MainNav from '../../components/layout/MainNav';
 
 const SingleNews = ({ post, slugs }) => {
-    const { locale } = useRouter();
+    const { locale, isFallback } = useRouter();
+
+    if (isFallback) {
+        return <div>Loading...</div>
+    }
 
     return (
         <>
@@ -38,7 +42,7 @@ export async function getStaticPaths({ locales }) {
         }
     }
 
-    return { paths: paths, fallback: "blocking" }
+    return { paths: paths, fallback: true }
 }
 
 export async function getStaticProps({ params, locales }) {
