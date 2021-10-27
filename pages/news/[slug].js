@@ -19,7 +19,6 @@ const SingleNews = ({ post, slugs }) => {
             <MainNav />
             <hr />
             <article>
-                {/* {name} */}
                 <h1>{post.title[locale]}</h1>
                 <p>{post.short_description[locale]}</p>
             </article>
