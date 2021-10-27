@@ -2,7 +2,24 @@ import { useRouter } from "next/router";
 import axios from "../../lib/axios";
 import LanguageNav from "../../components/layout/LanguageNav";
 import MainNav from '../../components/layout/MainNav';
-import CustomHead from "../../components/layout/CustomHead";
+
+const SingleNews = ({ post, slugs }) => {
+    const { locale } = useRouter();
+
+    return (
+        <>
+            <LanguageNav slugs={slugs} />
+            <hr />
+            <MainNav />
+            <hr />
+            <article>
+                {/* {name} */}
+                <h1>{post.title[locale]}</h1>
+                <p>{post.short_description[locale]}</p>
+            </article>
+        </>
+    )
+}
 
 export async function getStaticPaths({ locales }) {
     const { data } = await axios.get("/posts");
@@ -21,7 +38,7 @@ export async function getStaticPaths({ locales }) {
         }
     }
 
-    return { paths: paths, fallback: true }
+    return { paths: paths, fallback: "blocking" }
 }
 
 export async function getStaticProps({ params, locales }) {
@@ -42,28 +59,8 @@ export async function getStaticProps({ params, locales }) {
         props: { 
             post,
             slugs 
-        },
-        revalidate: 10,
+        }
     }
-}
-
-const SingleNews = ({ post, slugs }) => {
-    const { locale } = useRouter();
-
-    return (
-        <>
-        <CustomHead title={post.title[locale]} description={post.short_description[locale]} />
-        <LanguageNav slugs={slugs} />
-        <hr />
-        <MainNav />
-        <hr />
-        <article>
-            {/* {name} */}
-            <h1>{post.title[locale]}</h1>
-            <p>{post.short_description[locale]}</p>
-        </article>
-        </>
-    )
 }
 
 export default SingleNews;
